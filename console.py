@@ -4,7 +4,7 @@ import cmd
 import sys
 import shlex
 from models.base_model import BaseModel
-from models.__init__ import storage
+import models
 from models.user import User
 from models.place import Place
 from models.state import State
@@ -131,7 +131,8 @@ class HBNBCommand(cmd.Cmd):
                     key = sep_by_eq[0]
                     value = sep_by_eq[1]
                     if value[0] == '"' and value[-1] == '"':
-                        value = value[1:-1].replace('_', ' ').replace('"', '')
+                        value = value[1:-1].replace(
+                            '_', ' ').replace('"', '\"')
                     else:
                         try:
                             value = int(value)
@@ -142,7 +143,7 @@ class HBNBCommand(cmd.Cmd):
                                 pass
                 setattr(new_instance, key, value)
         print(new_instance.id)
-        storage.save()
+        new_instance.save()
 
     def help_create(self):
         """ Help information for the create method """
@@ -215,23 +216,23 @@ class HBNBCommand(cmd.Cmd):
         print("Destroys an individual instance of a class")
         print("[Usage]: destroy <className> <objectId>\n")
 
-    def do_all(self, args):
+    def do_all(self, line):
         """ Shows all objects, or all objects of a class"""
-        print_list = []
-
-        if args:
-            args = args.split(' ')[0]  # remove possible trailing args
-            if args not in HBNBCommand.classes:
-                print("** class doesn't exist **")
-                return
-            for k, v in storage._FileStorage__objects.items():
-                if k.split('.')[0] == args:
-                    print_list.append(str(v))
+        all_objects = models.storage.all()
+        args = shlex.split(line)
+        if len(args) == 0:
+            list1 = []
+            for key, value in all_objects.items():
+                list1.append(value.__str__())
+            print(list1)
+        elif args[0] not in HBNBCommand.classes:
+            print("** class doesn't exist **")
         else:
-            for k, v in storage._FileStorage__objects.items():
-                print_list.append(str(v))
-
-        print(print_list)
+            list1 = []
+            for key, value in all_objects.items():
+                if type(value) == eval(args[0]):
+                    list1.append(value.__str__())
+            print(list1)
 
     def help_all(self):
         """ Help information for the all command """

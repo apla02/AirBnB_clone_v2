@@ -17,7 +17,7 @@ class FileStorage:
             for key, value in FileStorage.__objects.items():
                 if cls == value.__class__ or cls == value.__class__.__name__:
                     copy_objects[key] = value
-            return copy_objects
+            return copy_objects # must to be return the dictionary with the objects of the specific class
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
@@ -41,6 +41,7 @@ class FileStorage:
         from models.city import City
         from models.amenity import Amenity
         from models.review import Review
+
 
         classes = {
                     'BaseModel': BaseModel, 'User': User, 'Place': Place,
@@ -66,4 +67,4 @@ class FileStorage:
         else:
             key = obj.__class__.__name__ + "." + obj.id
             if key in FileStorage.__objects:
-                del FileStorage.__objects[key]
+                del FileStorage.__objects[key] # check here
