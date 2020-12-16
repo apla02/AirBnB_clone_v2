@@ -81,7 +81,7 @@ class test_Place(test_basemodel):
 
     @unittest.skipIf(getenv('HBNB_TYPE_STORAGE') != 'db', "not supported")
     def test_without_mandatory_arguments(self):
-        """ """
+        """test without mandatory arguments """
         new = self.value()
         with self.assertRaises(OperationalError):
             try:

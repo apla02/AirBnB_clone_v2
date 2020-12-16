@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" """
+""" checking unittest of City Model"""
 import models
 from tests.test_models.test_base_model import test_basemodel
 from models.city import City
@@ -7,16 +7,16 @@ from models.state import State
 from sqlalchemy.exc import OperationalError
 
 class test_City(test_basemodel):
-    """ """
+    """checking unittest of City Model """
 
     def __init__(self, *args, **kwargs):
-        """ """
+        """ Instantiation of City instance"""
         super().__init__(*args, **kwargs)
         self.name = "City"
         self.value = City
 
     def test_creation(self):
-        """ """
+        """checking new State created """
         state = State(name="California")
         state.save()
         new = self.value(state_id=state.id, name="San_Francisco")
