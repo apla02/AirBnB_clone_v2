@@ -9,6 +9,8 @@ import os
 class test_fileStorage(unittest.TestCase):
     """ Class to test the file storage method """
 
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db',
+                     "Cannot storage if db is active")
     def setUp(self):
         """ Set up test environment """
         del_list = []
@@ -21,7 +23,7 @@ class test_fileStorage(unittest.TestCase):
         """ Remove storage file at end of tests """
         try:
             os.remove('file.json')
-        except:
+        except Exception:
             pass
 
     def test_obj_list_empty(self):
@@ -33,7 +35,7 @@ class test_fileStorage(unittest.TestCase):
         new = BaseModel()
         for obj in storage.all().values():
             temp = obj
-        self.assertTrue(temp is obj)
+            self.assertTrue(temp is obj)
 
     def test_all(self):
         """ __objects is properly returned """
@@ -67,7 +69,7 @@ class test_fileStorage(unittest.TestCase):
         storage.reload()
         for obj in storage.all().values():
             loaded = obj
-        self.assertEqual(new.to_dict()['id'], loaded.to_dict()['id'])
+            self.assertEqual(new.to_dict()['id'], loaded.to_dict()['id'])
 
     def test_reload_empty(self):
         """ Load from an empty file """
@@ -100,10 +102,9 @@ class test_fileStorage(unittest.TestCase):
         _id = new.to_dict()['id']
         for key in storage.all().keys():
             temp = key
-        self.assertEqual(temp, 'BaseModel' + '.' + _id)
+            self.assertEqual(temp, 'BaseModel' + '.' + _id)
 
     def test_storage_var_created(self):
         """ FileStorage object storage created """
         from models.engine.file_storage import FileStorage
-        print(type(storage))
         self.assertEqual(type(storage), FileStorage)

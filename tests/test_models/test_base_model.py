@@ -1,10 +1,11 @@
 #!/usr/bin/python3
 """ """
-from models.base_model import BaseModel
+from models.base_model import Base, BaseModel
 import unittest
 import datetime
 from uuid import UUID
 import json
+from os import getenv
 import os
 
 
@@ -22,6 +23,7 @@ class test_basemodel(unittest.TestCase):
         pass
 
     def tearDown(self):
+        """ """
         try:
             os.remove('file.json')
         except:
@@ -47,7 +49,8 @@ class test_basemodel(unittest.TestCase):
         with self.assertRaises(TypeError):
             new = BaseModel(**copy)
 
-    def test_save(self):
+    @unittest.skipIf(getenv('HBNB_TYPE_STORAGE') == 'db', "not supported")
+    def test_save_file(self):
         """ Testing save """
         i = self.value()
         i.save()
@@ -55,6 +58,10 @@ class test_basemodel(unittest.TestCase):
         with open('file.json', 'r') as f:
             j = json.load(f)
             self.assertEqual(j[key], i.to_dict())
+
+    def test_save_db(self):
+        """ """
+        
 
     def test_str(self):
         """ """
@@ -77,8 +84,8 @@ class test_basemodel(unittest.TestCase):
     def test_kwargs_one(self):
         """ """
         n = {'Name': 'test'}
-        with self.assertRaises(KeyError):
-            new = self.value(**n)
+        new = self.value(**n)
+        self.assertEqual(type(new), self.value)
 
     def test_id(self):
         """ """
