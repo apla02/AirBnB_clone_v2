@@ -6,6 +6,7 @@ from models.city import City
 from models.state import State
 from sqlalchemy.exc import OperationalError
 
+
 class test_City(test_basemodel):
     """checking unittest of City Model """
 
