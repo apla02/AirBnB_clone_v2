@@ -16,7 +16,7 @@ class test_City(test_basemodel):
         self.value = City
 
     def test_creation(self):
-        """checking new State created """
+        """checking new State created... """
         state = State(name="California")
         state.save()
         new = self.value(state_id=state.id, name="San_Francisco")

@@ -14,7 +14,7 @@ from sqlalchemy.exc import OperationalError
 
 
 class test_review(test_basemodel):
-    """Unittest for Review class """
+    """Unittest for Review class... """
 
     def __init__(self, *args, **kwargs):
         """Instantiation """

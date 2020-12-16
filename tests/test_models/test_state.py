@@ -36,5 +36,5 @@ class test_state(test_basemodel):
 
     @unittest.skipIf(getenv('HBNB_TYPE_STORAGE') == 'db', "not supported")
     def test_is_subclass(self):
-        """Check that State is a subclass of Basemodel"""
+        """Check that State is a subclass of Basemodel..."""
         self.assertTrue(isinstance(self.state, State))

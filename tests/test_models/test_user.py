@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Unittests for testing the User class """
+"""Unittests for testing the User class... """
 import models
 from os import getenv
 import unittest

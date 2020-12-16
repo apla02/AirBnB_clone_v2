@@ -12,7 +12,7 @@ from sqlalchemy.exc import OperationalError
 
 
 class test_Place(test_basemodel):
-    """Unittests for testing the place class"""
+    """Unittests for testing the place class..."""
 
     def __init__(self, *args, **kwargs):
         """ inicialization values """
