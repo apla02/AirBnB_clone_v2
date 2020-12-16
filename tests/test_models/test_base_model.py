@@ -23,10 +23,10 @@ class test_basemodel(unittest.TestCase):
         pass
 
     def tearDown(self):
-        """check the tearDown  to file jason"""
+        """ check the tearDown  to file jason """
         try:
             os.remove('file.json')
-        except:
+        except Exception:
             pass
 
     def test_default(self):
@@ -42,7 +42,7 @@ class test_basemodel(unittest.TestCase):
         self.assertFalse(new is i)
 
     def test_kwargs_int(self):
-        """checking if kwarg is an int """
+        """ checking if kwarg is an int """
         i = self.value()
         copy = i.to_dict()
         copy.update({1: 2})
