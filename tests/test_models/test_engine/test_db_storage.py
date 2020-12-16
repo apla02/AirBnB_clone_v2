@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """ Module for testing DBstorage"""
+
 import unittest
 from models.base_model import BaseModel
 from models import storage
@@ -10,7 +11,8 @@ from models.state import State
 class test_dbstorage(unittest.TestCase):
     """ Class to test the DBstorage method """
 
-    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') != 'db', "Cannot storage if db is active")
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') != 'db',
+                     "Cannot storage if db is active")
     def setUp(self):
         """ Set up test environment """
         del_list = []
@@ -59,7 +61,8 @@ class test_dbstorage(unittest.TestCase):
         new = State(name="Antioquia")
         new.save()
         _id = new.to_dict()['id']
-        self.assertIn(new.__class__.__name__+ '.' + _id, storage.all(type(new)).keys())
+        self.assertIn(
+            new.__class__.__name__ + '.' + _id, storage.all(type(new)).keys())
 
     def test_storage_var_created(self):
         """ FileStorage object storage created """
