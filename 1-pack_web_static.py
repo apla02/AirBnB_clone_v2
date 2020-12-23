@@ -11,8 +11,8 @@ def do_pack():
     '''
     try:
         now_string = datetime.now().strftime('%Y%m%d%H%M%S')
-        print('Packing web_static to {}'.format(filename))
         filename = 'versions/web_static_' + now_string + '.tgz'
+        print('Packing web_static to {}'.format(filename))
         local('mkdir -p versions')
         local('tar -cvzf {} web_static'.format(filename))
     except:
