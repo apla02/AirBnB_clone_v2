@@ -6,15 +6,15 @@
     <BODY>
         <H1>States</H1>
         <UL>
-            {%- if states == None %}
-            <H1>Not found!</H1>
-            {%- elif id == '' %}
+            {% if id == '' %}
             <H1>States</H1>
             <UL>
-                {% for state in states.values()| sort(attribute="name") %}
+                {% for state in states.values() | sort(attribute='name') %}
                 <LI>{{ state.id }}: <B>{{ state.name }}</B></LI>
                 {% endfor %}
+            </UL>
             {% else %}
+            {% if 'State.' + id in states.keys() %}
                 {% for state in states.values()|sort(attribute="name")%}
                 <HI>State: {{ state.name }}</HI>
                 <H3>Cities:</H3>
@@ -26,7 +26,10 @@
                     {%- endfor %}
                 {% endfor %}
                 </UL>
+                {% else %}
+                <H1>Not found!</H1>
             {% endif %}
+        {% endif %}
         </UL>
     </BODY>
 </HTML>
