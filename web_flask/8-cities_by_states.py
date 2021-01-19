@@ -16,9 +16,9 @@ def teardown(exception):
 
 
 @app.route('/cities_by_states', strict_slashes=False)
-def cities_by_statest():
+def cities_by_states():
     '''
-    list of states
+    list of cities by state
     '''
     states = storage.all('State')
     cities = storage.all('City')
