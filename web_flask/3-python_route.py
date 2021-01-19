@@ -22,23 +22,21 @@ def hbnb():
     return 'HBNB'
 
 
-@app.route('/c/<string:text>', strict_slashes=False)
+@app.route('/c/<text>', strict_slashes=False)
 def c_route(text):
     '''
     method to display c/text replacing '_' by ' '
     '''
-    text = text.replace('_', ' ')
-    return 'C {}'.format(text)
+    return 'C {}'.format(text.replace('_', ' '))
 
 
 @app.route('/python/', strict_slashes=False, defaults={'text': 'is cool'})
-@app.route('/python/<string:text>', strict_slashes=False)
+@app.route('/python/<text>', strict_slashes=False)
 def python_route(text):
     '''
     method to display Python/text with default value
     '''
-    text = text.replace('_', ' ')
-    return 'Python {}'.format(text)c
+    return 'Python {}'.format(text.replace('_', ' '))
 
 
 if __name__ == '__main__':
